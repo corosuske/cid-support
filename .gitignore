@@ -28,6 +28,7 @@
 *.log
 *.sql
 *.sqlite
+mylog
  
 # OS generated files #
 ######################

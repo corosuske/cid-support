@@ -32,7 +32,7 @@ then
     echo "                     WIFI NOT CONNECTED"
   fi
 else
- echo "no wifi card"
+ echo "                       no wifi card"
 fi
 
 

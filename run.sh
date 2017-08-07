@@ -28,6 +28,9 @@ then
   then
     echo -n "                     " 
     echo ${ESSID}
+    echo -n "                Cable IP:"
+    ifconfig wlan0 | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}'
+
   else
     echo "                     WIFI NOT CONNECTED"
   fi

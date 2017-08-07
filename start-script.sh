@@ -35,13 +35,24 @@ echo " "
 #check if the java applet is already running 
 if [ $running -gt 1 ] 
         then 
+
+		sudo dphys-swapfile swapoff
+
+
                 #the java applet is running, exit gracefully and inform the user
                 echo "the java applet is running in another shell"
                 echo "asuming this is a actual user logging in over ssh"
                 echo "starting bash"    
                 exit 0
         else
-                #the java applett is not running, we can go on 
+		#the java applett is not running, we can go on 
+		#make the file for readerdeteckt in het hardwarewatch
+		echo 1 > /tmp/READERDETECT
+		#turn off the swapfile
+		sudo dphys-swapfile swapoff
+		#start the shield daemon 
+		sudo /home/pi/shield.py &
+		clear
                 echo "                   starting the CID-configuration "
                 #is the the cable ethernet connection hooked up? 
                 if [ $ethstatus -eq 1 ]
@@ -74,7 +85,7 @@ if [ $running -gt 1 ]
                                                 sudo ifdown wlan0  >/dev/null 2>/dev/null
                                                 sleep 1
                                                 #and back up
-                                                sudo ifup wlan0=wireless0  >/dev/null 2>/dev/null
+                                                sudo ifup wlan0  >/dev/null 2>/dev/null
                                                 sleep 2
                                                 echo "..............Wifi IP adress is"$wifiipadress
                                                 #since we messed with the network setup lets check the ipv6 tunnel
